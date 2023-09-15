@@ -1,6 +1,6 @@
 # Sven's Config Files
 
-Hi, folks!
+Hi, folks,
 
 I'm Sven, an engineer and developer from Germany. I love to explore and learn and break stuff in the process.
 
