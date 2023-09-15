@@ -1,0 +1,184 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#FFFFFF",
+          "foreground": "#181818",
+          "leading_diamond": "\u256d\u2500\ue0b2",
+          "style": "diamond",
+          "template": " {{ if .WSL }} {{ end }}{{.Icon}} ",
+          "type": "os"
+        },
+        {
+          "background": "#007ACC",
+          "foreground": "#222222",
+          "properties": {
+            "style": "austin",
+            "threshold": 321
+          },
+          "style": "plain",
+          "template": " {{ .FormattedMs }} ",
+          "type": "executiontime"
+        },
+        {
+          "background": "#880000",
+          "foreground": "#ff8888",
+          "style": "plain",
+          "template": "{{ if gt .Code 0 }} {{ .Code }} {{ end }}",
+          "type": "status"
+        },
+        {
+          "type": "sysinfo",
+          "powerline_symbol": "",
+          "foreground": "#ffffff",
+          "background": "#181818",
+          "template": "  RAM: {{ round .PhysicalPercentUsed .Precision }}% | {{ (div ((sub .PhysicalTotalMemory .PhysicalFreeMemory)|float64) 1000000000.0) }}/{{ (div .PhysicalTotalMemory 1000000000.0) }}GB ",
+          "properties": {
+            "precision": 2
+          },
+          "style": "plain"
+        },
+        {
+          "type": "battery",
+          "style": "plain",
+          "powerline_symbol": "",
+          "foreground": "#193549",
+          "background": "#ffeb3b",
+          "background_templates": [
+            "{{if eq \"Charging\" .State.String}}#40c4ff{{end}}",
+            "{{if eq \"Discharging\" .State.String}}#ff5722{{end}}",
+            "{{if eq \"Full\" .State.String}}#4caf50{{end}}"
+          ],
+          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{else}}󱤄{{ end }} ",
+          "properties": {
+            "discharging_icon": "󱟟 ",
+            "charging_icon": "󰂄 ",
+            "charged_icon": "󰁹 "
+          }
+        },
+        {
+          "background": "#ff0000",
+          "foreground": "#ffee00",
+          "style": "plain",
+          "template": "  ROOT ",
+          "type": "root"
+        },
+        {
+          "background": "#333333",
+          "foreground": "#f14e32",
+          "style": "plain",
+          "template": " {{ if .SSHSession }} {{ end }}{{ .UserName }}@{{ .HostName }} ",
+          "type": "session"
+        },
+        {
+          "background": "#444444",
+          "foreground": "#cccccc",
+          "properties": {
+            "folder_icon": "…",
+            "style": "mixed"
+          },
+          "style": "plain",
+          "template": "  {{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "properties": {
+            "branch_icon": " ",
+            "cherry_pick_icon": " ",
+            "commit_icon": " ",
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
+            "merge_icon": " ",
+            "no_commits_icon": " ",
+            "rebase_icon": " ",
+            "revert_icon": " ",
+            "tag_icon": " "
+          },
+          "background": "#f14e32",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FFEB3B{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFA300{{ end }}",
+            "{{ if gt .Ahead 0 }}#FF7070{{ end }}",
+            "{{ if gt .Behind 0 }}#90F090{{ end }}"
+          ],
+          "foreground": "#000000",
+          "powerline_symbol": "",
+          "style": "plain",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} ",
+          "type": "git"
+        },
+        {
+          "background": "#7014eb",
+          "foreground": "#ffffff",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": " {{ if .Unsupported }}  {{ else }}󰪮 {{ .Full }}{{ end }} ",
+          "type": "dotnet"
+        },
+        {
+          "background": "#7FD5EA",
+          "foreground": "#ffffff",
+          "properties": {
+            "fetch_version": false
+          },
+          "style": "plain",
+          "template": "  ",
+          "type": "go"
+        },
+        {
+          "background": "#906cff",
+          "foreground": "#100e23",
+          "properties": {
+            "fetch_version": false
+          },
+          "style": "plain",
+          "template": "  ",
+          "type": "python"
+        },
+        {
+          "background": "#99908a",
+          "foreground": "#193549",
+          "properties": {
+            "fetch_version": false
+          },
+          "style": "plain",
+          "template": "  ",
+          "type": "rust"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "#FFFFFF",
+          "style": "plain",
+          "template": "\u2570\u2500{{.Name }} ",
+          "type": "shell",
+          "properties": {
+            "mapped_shell_names": {
+              "pwsh": "❯",
+              "shell": "❯",
+              "cmd": ">",
+              "lua": ">",
+              "nu": ":)",
+              "fish": "~>",
+              "zsh": "%",
+              "bash": "$"
+            }
+          }
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "version": 2
+}
